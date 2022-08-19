@@ -1,0 +1,138 @@
+Enter password: ***************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.27 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show datatbases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datatbases' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cse2b              |
+| information_schema |
+| mysql              |
+| nptel              |
+| performance_schema |
+| students           |
+| sys                |
++--------------------+
+7 rows in set (1.27 sec)
+
+mysql> create database tcl;
+Query OK, 1 row affected (0.36 sec)
+
+mysql> use tcl;
+Database changed
+mysql> create table transaction(id int,name char(20),marks int);
+Query OK, 0 rows affected (2.42 sec)
+
+mysql> insert table values(1,"abc","20),(2,"cdf",30);
+    "> insert table values(1,"abc","20),(2,"cdf",30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table values(1,"abc","20),(2,"cdf",30);
+insert table values(1,"abc","20),(2,"cdf' at line 1
+mysql> insert into transaction values(1,"abc","20),(2,"cdf",30);
+    "> insert into transaction values(1,"abc","20),(2,"cdf",30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cdf",30);
+insert into transaction values(1,"abc","20),(2,"cdf",30)' at line 1
+mysql> insert into transaction(id int,name char(20),marks int)values(1,"abc","20),(2,"cdf",30);
+    "> insert into transaction values(1,"abc","20),(2,"cdf",30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int,name char(20),marks int)values(1,"abc","20),(2,"cdf",30);
+insert into transa' at line 1
+mysql> insert into transaction(id,name,marks)values(1,"abc","20),(2,"cdf",30);
+    "> insert into transaction(id,name,marks)values(1,"abc","20),(2,"cdf",30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cdf",30);
+insert into transaction(id,name,marks)values(1,"abc","20),(2,"cdf",30)' at line 1
+mysql> insert into transaction(id,name,marks)values(1,"abc",20),(2,"cdf",30);
+Query OK, 2 rows affected (0.32 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into transaction values(3,"ghi",40);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select *from transaction;
++------+------+-------+
+| id   | name | marks |
++------+------+-------+
+|    1 | abc  |    20 |
+|    2 | cdf  |    30 |
+|    3 | ghi  |    40 |
++------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into values(4,"klm",50);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values(4,"klm",50)' at line 1
+mysql> insert into transaction values(4,"klm",50);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select *from trasaction;
+ERROR 1146 (42S02): Table 'tcl.trasaction' doesn't exist
+mysql> select *from transaction;
++------+------+-------+
+| id   | name | marks |
++------+------+-------+
+|    1 | abc  |    20 |
+|    2 | cdf  |    30 |
+|    3 | ghi  |    40 |
+|    4 | klm  |    50 |
++------+------+-------+
+4 rows in set (0.13 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select *from transaction;
++------+------+-------+
+| id   | name | marks |
++------+------+-------+
+|    1 | abc  |    20 |
+|    2 | cdf  |    30 |
+|    3 | ghi  |    40 |
++------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into transaction values(5,"sandy",50);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show transaction;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'transaction' at line 1
+mysql> select *from transaction;
++------+-------+-------+
+| id   | name  | marks |
++------+-------+-------+
+|    1 | abc   |    20 |
+|    2 | cdf   |    30 |
+|    3 | ghi   |    40 |
+|    5 | sandy |    50 |
++------+-------+-------+
+4 rows in set (0.09 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from transaction;
++------+-------+-------+
+| id   | name  | marks |
++------+-------+-------+
+|    1 | abc   |    20 |
+|    2 | cdf   |    30 |
+|    3 | ghi   |    40 |
+|    5 | sandy |    50 |
++------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
